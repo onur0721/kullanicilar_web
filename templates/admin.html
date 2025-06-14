@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Paneli</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="mb-4 text-center">🛠️ Admin Paneli</h2>
+
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Kullanıcı Adı</th>
+                            <th>Şifre</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for kullanici in kullanicilar %}
+                            {% if kullanici[1] != "admin" %}
+                            <tr>
+                                <td>{{ kullanici[0] }}</td>
+                                <td>{{ kullanici[1] }}</td>
+                                <td>{{ kullanici[2] }}</td>
+                                <td>
+                                    <form action="/sil/{{ kullanici[0] }}" method="POST" onsubmit="return confirm('Bu kullanıcı silinsin mi?');">
+                                        <button class="btn btn-danger btn-sm">Sil</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="text-center">
+                    <a href="/panel" class="btn btn-secondary">◀️ Panele Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
